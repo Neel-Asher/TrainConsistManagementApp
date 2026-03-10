@@ -1,28 +1,27 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase2TrainConsistMgmnt
+ * MAIN CLASS - UseCase3TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 2: Add Passenger Bogies to Train
+ * Use Case 3: Track Unique Bogie IDs
  *
  * Description:
- * This class demonstrates how passenger bogies can be
- * managed dynamically using ArrayList operations.
+ * This class ensures that duplicate bogie IDs are not
+ * added into the train formation using HashSet.
  *
  * At this stage, the application:
- * - Adds new bogies to the train
- * - Removes existing bogies
- * - Checks for bogie availability
- * - Displays the final consist
+ * - Stores bogie IDs
+ * - Prevents duplicates automatically
+ * - Displays unique bogie identifiers
  *
- * This maps CRUD operations using ArrayList.
+ * This maps uniqueness validation using Set.
  *
  * @author Developer
- * @version 2.0
+ * @version 3.0
  */
 
 public class Main {
@@ -37,29 +36,21 @@ public class Main {
 		System.out.println("======================================");
 		System.out.println();
 		
-		// Create a dynamic list to store passenger bogies
-		List<String> passengerBogies = new ArrayList<>();
+		// Create a hashset to store unique bogie ids
+		Set<String> bogies = new HashSet<>();
 		
 		// add vaues
-		passengerBogies.add("Sleeper");
-		passengerBogies.add("AC Chair");
-		passengerBogies.add("First Class");
+		bogies.add("BG101");
+		bogies.add("BG102");
+		bogies.add("BG103");
 		
-		System.out.println("After adding bogies: \n"+passengerBogies);
+		System.out.println("Bogie IDs after insertion \n"+bogies);
 		System.out.println();
 		
-		// remove values
-		passengerBogies.remove(1);
-		System.out.println("After removing 'AC Chair': \n"+passengerBogies);
-		System.out.println();
+		bogies.add("BG101");
+		bogies.add("BG102");
 		
-		// check if value exists
-		System.out.println("Checking if 'Sleeper' exists: ");
-		System.out.println("Contains Sleeper ? "+passengerBogies.contains("Sleeper"));
-		System.out.println();
-		
-		// display final train consist
-		System.out.println("Final Train Passenger Consist: "+passengerBogies);
+		System.out.println("Note: \nDuplicates are automatically ignored by HashSet!");
 		System.out.println();
 		System.out.println("Operations completed successfully!");
 		
