@@ -1,29 +1,28 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase5TrainConsistMgmnt
+ * MAIN CLASS - UseCase6TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 5: Preserve Insertion Order of Bogies
+ * Use Case 6: Map Bogie to Capacity (HashMap)
  *
  * Description:
- * This class maintains the exact attachment order of bogies
- * while also preventing duplicate entries using LinkedHashSet.
+ * This class associates each bogie with its seating or
+ * load capacity using a key-value mapping structure.
  *
  * At this stage, the application:
- * - Attaches bogies in order
- * - Preserves insertion sequence
- * - Avoids duplicate bogies
- * - Displays final train formation
+ * - Creates a HashMap for bogie-capacity mapping
+ * - Inserts capacity values for each bogie
+ * - Iterates through map entries
+ * - Displays bogie and capacity information
  *
- * This maps ordered uniqueness using LinkedHashSet.
+ * This maps lookup-based access using HashMap.
  *
  * @author Developer
- * @version 5.0
+ * @version 6.0
  */
-
 
 public class Main {
 	
@@ -35,20 +34,16 @@ public class Main {
 		System.out.println("======================================");
 		System.out.println();
 		
-		// LinkedHashSet preserves order and avoids duplication 
-		Set<String> formation = new LinkedHashSet<>();
+        // HashMap stores data in key -> value format
+        Map<String, Integer> capacity = new HashMap<>();
 		
 		// add vaues
-		formation.add("Engine");
-		formation.add("Sleeper");
-		formation.add("Cargo");
-		formation.add("Guard");
-		formation.add("Engine");
-		formation.add("Sleeper");
-		System.out.println("Final Train Formation: \n"+formation);
-		System.out.println();
+		capacity.put("First Class",24);
+		capacity.put("Cargo",120);
+		capacity.put("Sleeper",72);
+		capacity.put("AC Chair",56);
+		System.out.println("Bogie Capacity Details: \n"+capacity);
 		
-		System.out.println("Note: \nLinkedHashSet preserves order and removes duplicates automatically");
 		System.out.println();
 		System.out.println("Operations completed successfully!");
 
