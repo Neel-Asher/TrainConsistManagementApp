@@ -1,27 +1,29 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase3TrainConsistMgmnt
+ * MAIN CLASS - UseCase5TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 3: Track Unique Bogie IDs
+ * Use Case 5: Preserve Insertion Order of Bogies
  *
  * Description:
- * This class ensures that duplicate bogie IDs are not
- * added into the train formation using HashSet.
+ * This class maintains the exact attachment order of bogies
+ * while also preventing duplicate entries using LinkedHashSet.
  *
  * At this stage, the application:
- * - Stores bogie IDs
- * - Prevents duplicates automatically
- * - Displays unique bogie identifiers
+ * - Attaches bogies in order
+ * - Preserves insertion sequence
+ * - Avoids duplicate bogies
+ * - Displays final train formation
  *
- * This maps uniqueness validation using Set.
+ * This maps ordered uniqueness using LinkedHashSet.
  *
  * @author Developer
- * @version 3.0
+ * @version 5.0
  */
+
 
 public class Main {
 	
@@ -33,28 +35,20 @@ public class Main {
 		System.out.println("======================================");
 		System.out.println();
 		
-		// Create a linked list to maintain insertion order of bogie ids
-		List<String> trainConsist = new LinkedList<>();
+		// LinkedHashSet preserves order and avoids duplication 
+		Set<String> formation = new LinkedHashSet<>();
 		
 		// add vaues
-		trainConsist.add("Engine");
-		trainConsist.add("Sleeper");
-		trainConsist.add("AC");
-		trainConsist.add("Cargo");
-		trainConsist.add("Guard");
-		System.out.println("Initial Train Consist: \n"+trainConsist);
+		formation.add("Engine");
+		formation.add("Sleeper");
+		formation.add("Cargo");
+		formation.add("Guard");
+		formation.add("Engine");
+		formation.add("Sleeper");
+		System.out.println("Final Train Formation: \n"+formation);
 		System.out.println();
 		
-		// add value at index
-		trainConsist.add(2,"Pantry Car");
-		System.out.println("After inserting 'Pantry Car' at position 2: \n"+trainConsist);
-		System.out.println();
-		
-		// remove first and last elements
-		trainConsist.removeFirst();
-		trainConsist.removeLast();
-		System.out.println("After removing first and last elements: \n"+trainConsist);
-
+		System.out.println("Note: \nLinkedHashSet preserves order and removes duplicates automatically");
 		System.out.println();
 		System.out.println("Operations completed successfully!");
 
