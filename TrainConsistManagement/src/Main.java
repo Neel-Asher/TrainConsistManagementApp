@@ -3,49 +3,62 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase17TrainConsistMgmnt
+ * MAIN CLASS - UseCase18TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 17: Sort Bogie Names Using Arrays.sort()
+ * Use Case 18: Linear Search for Bogie ID
  *
  * Description:
- * This class demonstrates sorting of bogie type names
- * alphabetically using Java's built-in Arrays.sort() method.
+ * This class demonstrates searching for a specific bogie ID
+ * using a simple Linear Search algorithm.
  *
  * At this stage, the application:
- * - Creates an array of bogie names
- * - Uses Arrays.sort() for sorting
- * - Displays sorted results
+ * - Creates an array of bogie IDs
+ * - Accepts a search key
+ * - Traverses array sequentially
+ * - Stops when match is found
+ * - Displays search result
  *
- * This maps optimized sorting using Java library utilities.
+ * This maps basic searching logic using sequential traversal.
  *
  * @author Developer
- * @version 17.0
+ * @version 18.0
  */
 
 public class Main {
 
 	public static void main (String[] args) {
 		
-		List bogieNames = new ArrayList<>();
+		List<Object> bogieNames = new ArrayList<>();
 		bogieNames.add("Sleeper");
 		bogieNames.add("AC First Class");
 		bogieNames.add("AC 2 Tier");
 		bogieNames.add("AC 3 Tier");
 		bogieNames.add("General");
 		
-		System.out.println("Original Bogie Names:");
-		for (Object name : bogieNames) {
-			System.out.println(name);
+		// Display the bogie names
+		System.out.println("Bogie Names:");
+		for (Object bogie : bogieNames) {
+			System.out.println("- " + bogie);
 		}
 		
-		// sort using Arrays.sort()
-		String[] bogieArray = (String[]) bogieNames.toArray(new String[0]);
+		// Example search key
+		String searchKey = "AC 2 Tier";
 		
-		//display sorted bogie names
-		System.out.println("\nSorted Bogie Names:");
-		for (String name : bogieArray) {
-			System.out.println(name);
+		// Linear search for the bogie ID
+		boolean found = false;
+		for (Object bogie : bogieNames) {
+			if (bogie.equals(searchKey)) {
+				found = true;
+				break;
+			}
+		}
+		
+		// Display search result
+		if (found) {
+			System.out.println("\nBogie '" + searchKey + "' found in the list.");
+		} else {
+			System.out.println("\nBogie '" + searchKey + "' not found in the list.");
 		}
 		
 		System.out.println();
