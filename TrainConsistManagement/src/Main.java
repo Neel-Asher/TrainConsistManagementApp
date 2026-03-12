@@ -5,29 +5,28 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase9TrainConsistMgmnt
+ * MAIN CLASS - UseCase10TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 9: Group Bogies by Type
+ * Use Case 10: Count Total Seats in Train
  *
  * Description:
- * This class groups similar bogies together using
- * Java Stream Collectors.groupingBy().
+ * This class aggregates seating capacity of all bogies
+ * into a single total using Stream reduce().
  *
  * At this stage, the application:
- * - Creates a list of bogies
- * - Streams the list
- * - Groups bogies by name
- * - Stores grouped data in a Map
- * - Displays grouped structure
+ * - Creates bogie list
+ * - Maps bogies to capacity
+ * - Reduces values into total
+ * - Displays total seat count
  *
- * This maps classification logic using groupingBy.
+ * This maps aggregation logic using reduce().
  *
  * @author Developer
- * @version 9.0
+ * @version 10.0
  */
 
-public class Main {
+class Main {
 	
 	// inner class representing a Bogie
 	static class Bogie {
@@ -62,15 +61,12 @@ public class Main {
         bogie.forEach(b -> System.out.println("- " + b.name + " (Capacity: " + b.capacity + ")"));
         System.out.println();
         
-        // Group bogies by type
-        var groupedBogies = bogie.stream().collect(java.util.stream.Collectors.groupingBy(b -> b.name));
+        // Calculate total seating capacity using Stream reduce()
+        int totalSeats = bogie.stream().map(b -> b.capacity).reduce(0, Integer::sum);
         
-        // Display grouped bogies
-        System.out.println("Grouped Bogies by Type:");
-        groupedBogies.forEach((type, bogies) -> {
-			System.out.println(type + ":");
-			bogies.forEach(b -> System.out.println("  - " + b.name + " (Capacity: " + b.capacity + ")"));
-		});
+        // Display total seat count
+        System.out.println("Total Seating Capacity in Train: " + totalSeats);
+        
         
 		System.out.println();
 		System.out.println("Operations completed successfully!");
