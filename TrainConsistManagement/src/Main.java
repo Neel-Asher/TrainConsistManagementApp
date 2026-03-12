@@ -3,26 +3,26 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase19TrainConsistMgmnt
+ * MAIN CLASS - UseCase20TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 19: Binary Search for Bogie ID
+ * Use Case 20: Exception Handling During Search Operations
  *
  * Description:
- * This class demonstrates searching for a specific bogie ID
- * using the Binary Search algorithm on sorted data.
+ * This class prevents searching when no bogies exist
+ * by applying fail-fast validation using exceptions.
  *
  * At this stage, the application:
- * - Creates sorted bogie ID array
- * - Defines search key
- * - Applies binary search logic
- * - Narrows search range each iteration
- * - Displays result
+ * - Creates bogie collection
+ * - Validates system state
+ * - Throws exception if empty
+ * - Stops invalid search operation
+ * - Displays meaningful message
  *
- * This maps optimized searching logic using divide-and-conquer.
+ * This maps defensive programming using runtime exceptions.
  *
  * @author Developer
- * @version 19.0
+ * @version 20.0
  */
 
 
@@ -30,45 +30,27 @@ public class Main {
 
 	public static void main (String[] args) {
 		
-		List<Object> bogieNames = new ArrayList<>();
-		bogieNames.add("Sleeper");
-		bogieNames.add("AC First Class");
-		bogieNames.add("AC 2 Tier");
-		bogieNames.add("AC 3 Tier");
-		bogieNames.add("General");
+		String[] bogieIds = {};
 		
-		// Display the bogie names
-		System.out.println("Bogie Names:");
-		for (Object bogie : bogieNames) {
-			System.out.println("- " + bogie);
+		String searchId = "BG101";
+		
+		if (bogieIds.length == 0) {
+			throw new IllegalStateException("No bogies available for search. Please add bogies before searching.");
 		}
 		
-		// Example search key
-		String searchKey = "AC 2 Tier";
-		
-		// Binary Search Logic
 		boolean found = false;
-		int left = 0;
-		int right = bogieNames.size() - 1;
 		
-		while (left <= right) {
-			int mid = left + (right - left) / 2;
-			String midValue = (String) bogieNames.get(mid);
-			
-			if (midValue.equals(searchKey)) {
+		for (String id : bogieIds) {
+			if (id.equals(searchId)) {
 				found = true;
 				break;
-			} else if (midValue.compareTo(searchKey) < 0) {
-				left = mid + 1; // Search in the right half
-			} else {
-				right = mid - 1; // Search in the left half
 			}
 		}
-		// Display search result
-		if (found) {
-			System.out.println("\nBogie '" + searchKey + "' found in the list.");
+		
+		if(found) {
+			System.out.println("Bogie " + searchId + " found in the consist.");
 		} else {
-			System.out.println("\nBogie '" + searchKey + "' not found in the list.");
+			System.out.println("Bogie " + searchId + " not found in the consist.");
 		}
 		
 		System.out.println();
