@@ -5,26 +5,26 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase8TrainConsistMgmnt
+ * MAIN CLASS - UseCase9TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 8: Filter Passenger Bogies Using Streams
+ * Use Case 9: Group Bogies by Type
  *
  * Description:
- * This class filters passenger bogies based on seating
- * capacity using Java Stream API.
+ * This class groups similar bogies together using
+ * Java Stream Collectors.groupingBy().
  *
  * At this stage, the application:
  * - Creates a list of bogies
- * - Converts list into stream
- * - Applies filter condition
- * - Collects filtered result
- * - Displays qualifying bogies
+ * - Streams the list
+ * - Groups bogies by name
+ * - Stores grouped data in a Map
+ * - Displays grouped structure
  *
- * This maps functional filtering using Streams.
+ * This maps classification logic using groupingBy.
  *
  * @author Developer
- * @version 8.0
+ * @version 9.0
  */
 
 public class Main {
@@ -62,12 +62,15 @@ public class Main {
         bogie.forEach(b -> System.out.println("- " + b.name + " (Capacity: " + b.capacity + ")"));
         System.out.println();
         
-        // Filter bogies with capacity greater than 60
-        List<Bogie> filteredBogies = bogie.stream().filter(b -> b.capacity > 60).toList();
+        // Group bogies by type
+        var groupedBogies = bogie.stream().collect(java.util.stream.Collectors.groupingBy(b -> b.name));
         
-        // Display filtered bogies
-		System.out.println("Passenger Bogies with Capacity > 60:");
-		filteredBogies.forEach(b -> System.out.println("- " + b.name + " (Capacity: " + b.capacity + ")"));
+        // Display grouped bogies
+        System.out.println("Grouped Bogies by Type:");
+        groupedBogies.forEach((type, bogies) -> {
+			System.out.println(type + ":");
+			bogies.forEach(b -> System.out.println("  - " + b.name + " (Capacity: " + b.capacity + ")"));
+		});
         
 		System.out.println();
 		System.out.println("Operations completed successfully!");
