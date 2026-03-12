@@ -3,27 +3,28 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase18TrainConsistMgmnt
+ * MAIN CLASS - UseCase19TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 18: Linear Search for Bogie ID
+ * Use Case 19: Binary Search for Bogie ID
  *
  * Description:
  * This class demonstrates searching for a specific bogie ID
- * using a simple Linear Search algorithm.
+ * using the Binary Search algorithm on sorted data.
  *
  * At this stage, the application:
- * - Creates an array of bogie IDs
- * - Accepts a search key
- * - Traverses array sequentially
- * - Stops when match is found
- * - Displays search result
+ * - Creates sorted bogie ID array
+ * - Defines search key
+ * - Applies binary search logic
+ * - Narrows search range each iteration
+ * - Displays result
  *
- * This maps basic searching logic using sequential traversal.
+ * This maps optimized searching logic using divide-and-conquer.
  *
  * @author Developer
- * @version 18.0
+ * @version 19.0
  */
+
 
 public class Main {
 
@@ -45,15 +46,24 @@ public class Main {
 		// Example search key
 		String searchKey = "AC 2 Tier";
 		
-		// Linear search for the bogie ID
+		// Binary Search Logic
 		boolean found = false;
-		for (Object bogie : bogieNames) {
-			if (bogie.equals(searchKey)) {
+		int left = 0;
+		int right = bogieNames.size() - 1;
+		
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+			String midValue = (String) bogieNames.get(mid);
+			
+			if (midValue.equals(searchKey)) {
 				found = true;
 				break;
+			} else if (midValue.compareTo(searchKey) < 0) {
+				left = mid + 1; // Search in the right half
+			} else {
+				right = mid - 1; // Search in the left half
 			}
 		}
-		
 		// Display search result
 		if (found) {
 			System.out.println("\nBogie '" + searchKey + "' found in the list.");
