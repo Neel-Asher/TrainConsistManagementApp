@@ -2,76 +2,58 @@ import java.util.List;
 
 /**
  * ======================================================================
- * MAIN CLASS - UseCase15TrainConsistMgmnt
+ * MAIN CLASS - UseCase16TrainConsistMgmnt
  * ======================================================================
  *
- * Use Case 15: Safe Cargo Assignment Using try-catch-finally
+ * Use Case 16: Sort Passenger Bogies by Capacity
  *
  * Description:
- * This class safely assigns cargo to goods bogies
- * while handling unsafe combinations using structured
- * exception handling blocks.
+ * This class demonstrates manual sorting of passenger
+ * bogie capacities using the Bubble Sort algorithm
+ * instead of built-in sorting utilities.
  *
  * At this stage, the application:
- * - Defines a custom runtime exception
- * - Validates cargo assignment rules
- * - Throws exception for unsafe cargo
- * - Catches and handles the exception
- * - Executes finally block for logging
+ * - Creates an array of capacities
+ * - Compares adjacent values
+ * - Swaps values when required
+ * - Repeats passes until sorted
+ * - Displays sorted result
  *
- * This maps runtime safety handling using try-catch-finally.
+ * This maps algorithmic sorting logic using Bubble Sort.
  *
  * @author Developer
- * @version 15.0
+ * @version 16.0
  */
 
+
 public class Main {
-	
-	// custom exception for invalid bogie capacity
-	static class CargoSafetyException extends RuntimeException {
-		public CargoSafetyException(String message) {
-			super(message);
-		}
-	}
-	
-	static class GoodsBogie {
-		String shape;
-		String cargo;
-		
-		GoodsBogie(String shape) {
-			this.shape = shape;
-		}
-		
-		void assignCargo(String cargo) {
-			// Define unsafe cargo combinations
-			if ((shape.equals("Boxcar") && cargo.equals("Liquids")) ||
-				(shape.equals("Flatcar") && cargo.equals("Heavy Machinery"))) {
-				throw new CargoSafetyException("Unsafe cargo assignment: " + cargo + " cannot be assigned to " + shape);
-			}
-			this.cargo = cargo;
-			System.out.println("Cargo '" + cargo + "' assigned to " + shape);
-		}
-	}
 
 	public static void main (String[] args) {
 		
-		// Create goods bogies
-		GoodsBogie boxcar = new GoodsBogie("Boxcar");
-		GoodsBogie flatcar = new GoodsBogie("Flatcar");
+		// Sample array of passenger bogie capacities
+		List<Integer> capacities = List.of(50, 30, 40, 20, 60);
+		System.out.println("Original Capacities: " + capacities);
 		
-		// List of cargo to assign
-		String[] cargoList = {"Grain", "Liquids", "Heavy Machinery"};
+		// Convert List to array for sorting
+		Integer[] capacityArray = capacities.toArray(new Integer[0]);
 		
-		// Attempt to assign cargo with exception handling
-		for (String cargo : cargoList) {
-			try {
-				boxcar.assignCargo(cargo);
-				flatcar.assignCargo(cargo);
-			} catch (CargoSafetyException e) {
-				System.err.println("Error: " + e.getMessage());
-			} finally {
-				System.out.println("Attempted to assign '" + cargo + "' to both bogies.");
+		// Bubble Sort Algorithm
+		int n = capacityArray.length;
+		for (int i = 0; i < n-1; i++) {
+			for (int j = 0; j < n-i-1; j++) {
+				if (capacityArray[j] > capacityArray[j+1]) {
+					// Swap capacityArray[j] and capacityArray[j+1]
+					int temp = capacityArray[j];
+					capacityArray[j] = capacityArray[j+1];
+					capacityArray[j+1] = temp;
+				}
 			}
+		}
+		
+		// Display sorted capacities
+		System.out.print("Sorted Capacities: ");
+		for (int capacity : capacityArray) {
+			System.out.print(capacity + " ");
 		}
 		
 		System.out.println();
